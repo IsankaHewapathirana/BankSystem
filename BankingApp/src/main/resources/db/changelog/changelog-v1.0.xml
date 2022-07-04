@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="isanka" id="1">
+        <createTable tableName="customer">
+            <column autoIncrement="true" name="customer_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nic" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gender" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dob" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mobile" type="VARCHAR(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="marital_status" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="occupation" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="beneficiary">
+            <column autoIncrement="true" name="beneficiary_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nic" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gender" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dob" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mobile" type="VARCHAR(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="relationship" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_id" type="INT">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <createTable tableName="saving_account">
+            <column name="account_no" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="balance" type="DECIMAL">
+                <constraints nullable="false" />
+            </column>
+            <column name="open_date" type="DATE">
+                <constraints nullable="false" />
+            </column>
+            <column name="interest_rate" type="DECIMAL"/>
+            <column name="customer_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="fixed_deposit">
+            <column name="account_no" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="balance" type="DECIMAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="open_date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interest_rate" type="DECIMAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="beneficiary" baseColumnNames="customer_id" constraintName="beneficiary_fk"
+                                 referencedTableName="customer" referencedColumnNames="customer_id"/>
+
+        <addForeignKeyConstraint baseTableName="saving_account" baseColumnNames="customer_id" constraintName="savings_fk"
+                                 referencedTableName="customer" referencedColumnNames="customer_id"/>
+
+        <addForeignKeyConstraint baseTableName="fixed_deposit" baseColumnNames="customer_id" constraintName="fixed_fk"
+                                 referencedTableName="customer" referencedColumnNames="customer_id"/>
+
+    </changeSet>
+</databaseChangeLog>
